@@ -1,0 +1,117 @@
+{
+  "description": "Toss Up",
+  "exclusive_set": [
+    "minecraft:wind_burst",
+    "minecraft:density"
+  ],
+  "supported_items": "#minecraft:enchantable/mace",
+  "primary_items": "#minecraft:enchantable/mace",
+  "weight": 2,
+  "max_level": 3,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 8
+  },
+  "max_cost": {
+    "base": 30,
+    "per_level_above_first": 8
+  },
+  "anvil_cost": 2,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:hit_block": [
+      {
+        "effect": {
+          "type": "minecraft:all_of",
+          "effects": [
+            {
+              "type": "minecraft:explode",
+              "radius": 0.5,
+              "offset": [
+                0,
+                0.5,
+                0
+              ],
+              "block_interaction": "none",
+              "small_particle": {
+                "type": "minecraft:block",
+                "block_state": "minecraft:air"
+              },
+              "large_particle": {
+                "type": "minecraft:block",
+                "block_state": "minecraft:air"
+              },
+              "sound": {
+                "sound_id": "",
+                "range": 1
+              },
+              "knockback_multiplier": {
+                "type": "minecraft:linear",
+                "base": 1.25,
+                "per_level_above_first": 0.25
+              },
+              "attribute_to_user": true,
+              "create_fire": false
+            },
+            {
+              "type": "minecraft:damage_item",
+              "amount": 10
+            },
+            {
+              "type": "minecraft:run_function",
+              "function": "toss_up:toss_up/enchantment"
+            }
+          ]
+        },
+        "requirements": [
+          {
+            "condition": "minecraft:location_check",
+            "offsetY": 1,
+            "predicate": {
+              "position": {},
+              "block": {
+                "blocks": "#toss_up:air"
+              }
+            }
+          },
+          {
+            "condition": "minecraft:inverted",
+            "term": {
+              "condition": "minecraft:location_check",
+              "predicate": {
+                "block": {
+                  "blocks": "#toss_up:toss_up/cant_be_tossed"
+                }
+              }
+            }
+          },
+          {
+            "condition": "minecraft:inverted",
+            "term": {
+              "condition": "minecraft:value_check",
+              "value": {
+                "type": "minecraft:score",
+                "target": "this",
+                "score": "toss_up.cooldown"
+              },
+              "range": {
+                "min": 1
+              }
+            }
+          },
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "flags": {
+                "is_sneaking": false
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
