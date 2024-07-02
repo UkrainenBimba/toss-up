@@ -1,0 +1,1 @@
+$execute as @e[type=!#toss_up:entity,dx=0,dz=0,dy=0] run damage @s $(damage) falling_block by $(player)

@@ -1,3 +1,5 @@
+function gu:load
+
 scoreboard objectives add toss_up.strength dummy
 scoreboard objectives add toss_up.cooldown dummy
 
